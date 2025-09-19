@@ -129,9 +129,8 @@ if uploaded_file is not None:
     }
 
     # Train and evaluate models
-results = {}
-for name, model in models.items():
-    try:
+    results = {}
+    for name, model in models.items():
         model.fit(X_train, y_train)
         y_pred = model.predict(X_test)
         acc = accuracy_score(y_test, y_pred)
@@ -141,9 +140,6 @@ for name, model in models.items():
         st.write("**Classification Report**:")
         report = classification_report(y_test, y_pred, target_names=le.classes_, output_dict=True)
         st.table(pd.DataFrame(report).transpose())
-    except Exception as e:
-        st.error(f"{name} failed: {str(e)}")
-
 
     # Visualize model performance
     st.write("### Model Comparison")
